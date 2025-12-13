@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -382,83 +382,14 @@
     /* Fade-in animation on scroll */
     .workflow-card.show { opacity: 1; transform: translateY(0); transition: all 0.6s ease-out; }
 
-    #why-choose-us {
-  max-width: 1400px;
-  margin: auto;
-  padding: 8rem 2rem;
-  text-align: center;
-  position: relative;
-}
-
-.choose-us-animation img {
-  position: absolute;
-  width: 140px;
-  animation: float 6s ease-in-out infinite;
-  opacity: 0.9;
-  transition: transform 0.3s ease;
-}
-
-.char1 { top: 10%; left: -10%; }
-.char2 { bottom: 15%; right: -10%; animation-delay: 1s; }
-.char3 { top: 40%; right: -5%; animation-delay: 2s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
-}
-
-.choose-us-cards {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  scroll-behavior: smooth;
-  margin-top: 5rem;
-}
-
-.choose-us-cards::-webkit-scrollbar { display: none; } /* Hide scrollbar */
-
-.choose-card {
-  min-width: 280px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(12px);
-  padding: 2.5rem;
-  border-radius: 28px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-  transition: transform 0.6s ease, box-shadow 0.6s ease;
-}
-
-.choose-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 25px 60px rgba(250,204,21,0.35);
-}
-
-.choose-card h3 { color: #facc15; font-size: 1.5rem; margin-bottom: 1rem; }
-.choose-card p { color: #e5e7eb; font-size: 1.05rem; line-height: 1.6; }
-
-.choose-us-cta { margin-top: 4rem; }
-.choose-us-cta .btn-primary {
-  padding: 1.1rem 2.5rem;
-  border-radius: 24px;
-  font-weight: 800;
-  font-size: 1.15rem;
-  background: linear-gradient(90deg, #facc15, #ffd633);
-  color: #000;
-  box-shadow: 0 8px 20px rgba(250,204,21,0.35);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.choose-us-cta .btn-primary:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(250,204,21,0.55);
-}
+    
   </style>
 </head>
 <body>
 <header>
   <div class="nav">
     <div class="logo">
-      <img src="Logo.png" alt="MAJ Media Logo">
+      <img src="logo.jpg" alt="MAJ Media Logo">
       <span>MAJ Media</span>
     </div>
     <div class="nav-links">
@@ -534,43 +465,6 @@
   </div>
 </section>
 
-<section id="why-choose-us">
-  <div class="section-title">
-    <h2>Why Choose Us?</h2>
-    <p>We bring creativity, strategy, and measurable results to every brand we work with.</p>
-  </div>
-
-  <!-- Animated floating avatars from unDraw -->
-  <div class="choose-us-animation">
-    <img src="https://undraw.co/api/illustrations/team_work.svg" class="char1" alt="Team collaboration">
-    <img src="https://undraw.co/api/illustrations/advertising_campaign.svg" class="char2" alt="Social media campaign">
-    <img src="https://undraw.co/api/illustrations/data_analytics.svg" class="char3" alt="Analytics and reporting">
-  </div>
-
-  <!-- Cards in horizontal scroll style -->
-  <div class="choose-us-cards">
-    <div class="choose-card">
-      <h3>Strategic Growth</h3>
-      <p>We analyze your market and craft campaigns designed to grow your brand exponentially.</p>
-    </div>
-    <div class="choose-card">
-      <h3>Creative Storytelling</h3>
-      <p>Visual storytelling and content creation that grabs attention and drives engagement.</p>
-    </div>
-    <div class="choose-card">
-      <h3>Data-Driven Results</h3>
-      <p>Real-time tracking and analytics so you know exactly how your campaigns are performing.</p>
-    </div>
-    <div class="choose-card">
-      <h3>Collaborative Team</h3>
-      <p>Work with a dedicated team of social media experts who treat your brand like their own.</p>
-    </div>
-  </div>
-
-  <div class="choose-us-cta">
-    <a class="btn-primary" href="https://wa.link/j1qjj7" target="_blank">Work With Us</a>
-  </div>
-</section>
 
 <section id="testimonials">
   <div class="section-title">
@@ -594,9 +488,7 @@
         <p>I now understand ads, Canva and audience targeting.</p>
         <h4>Genevieve</h4><span>★★★★★</span>
       </div>
-      <div class="swiper-slide testimonial-card">Add Testimonial</div>
-      <div class="swiper-slide testimonial-card">Add Testimonial</div>
-      <div class="swiper-slide testimonial-card">Add Testimonial</div>
+      
     </div>
     <div class="swiper-pagination testimonial-pagination"></div>
   </div>
@@ -606,7 +498,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-logo">
-        <img src="Logo.png" alt="MAJ Media Logo">
+        <img src="logo.jpg" alt="MAJ Media Logo">
         <span>MAJ Media Digital</span>
       </div>
       <p>Helping brands grow through social media.</p>
@@ -656,12 +548,7 @@ const workflowObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 workflowCards.forEach(card => workflowObserver.observe(card));
 
-// Choose cards observer
-const chooseCards = document.querySelectorAll('.choose-card');
-const chooseObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
-}, { threshold: 0.2 });
-chooseCards.forEach(card => chooseObserver.observe(card));
+
 </script>
 </body>
-</h
+</html>
