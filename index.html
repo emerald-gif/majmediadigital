@@ -298,6 +298,92 @@
       padding: 4px;
     }
 
+
+     /* ===== 2025 SERVICES UPGRADE ===== */
+
+.premium-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.4rem;
+}
+
+.service-card.premium {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 30px;
+  padding: 2.8rem 2.5rem;
+  transition: all 0.6s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+
+/* Glow layer */
+.service-card.premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(250,204,21,0.25),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.service-card.premium:hover::before {
+  opacity: 1;
+}
+
+.service-card.premium:hover {
+  transform: translateY(-16px) scale(1.03);
+  box-shadow: 0 40px 80px rgba(250,204,21,0.3);
+}
+
+/* Avatar */
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 24px;
+  background: rgba(250,204,21,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+.avatar svg {
+  width: 70px;
+  height: 70px;
+}
+
+/* Text */
+.service-card.premium h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  color: #facc15;
+}
+
+.service-card.premium p {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Float animation */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+
+    
     /* ================= PREMIUM TESTIMONIAL UPGRADE ================= */
     #testimonials { position: relative; }
 
@@ -450,13 +536,70 @@
 <section id="services">
   <div class="section-title">
     <h2>Our Services</h2>
-    <p>Everything your brand needs</p>
+    <p>Everything your brand needs to scale digitally</p>
   </div>
-  <div class="services">
-    <div class="service-card"><h3>Social Media Management</h3></div>
-    <div class="service-card"><h3>Sponsored Ads</h3></div>
-    <div class="service-card"><h3>Content Creation</h3></div>
-    <div class="service-card"><h3>Training & Consulting</h3></div>
+
+  <div class="services premium-services">
+
+    <!-- Service 1 -->
+    <div class="service-card premium">
+      <div class="avatar">
+        <!-- SVG Anime Avatar -->
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" fill="#facc15"/>
+          <circle cx="100" cy="85" r="40" fill="#0b1d39"/>
+          <rect x="45" y="125" width="110" height="45" rx="22" fill="#0b1d39"/>
+          <circle cx="85" cy="80" r="6" fill="#fff"/>
+          <circle cx="115" cy="80" r="6" fill="#fff"/>
+        </svg>
+      </div>
+      <h3>Social Media Management</h3>
+      <p>Consistent content, audience growth, and brand positioning across all platforms.</p>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card premium">
+      <div class="avatar">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" fill="#0b1d39"/>
+          <circle cx="100" cy="85" r="40" fill="#facc15"/>
+          <rect x="45" y="125" width="110" height="45" rx="22" fill="#facc15"/>
+          <circle cx="85" cy="80" r="6" fill="#0b1d39"/>
+          <circle cx="115" cy="80" r="6" fill="#0b1d39"/>
+        </svg>
+      </div>
+      <h3>Sponsored Ads</h3>
+      <p>High-converting ad campaigns built with data, psychology and performance tracking.</p>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card premium">
+      <div class="avatar">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" fill="#facc15"/>
+          <circle cx="100" cy="80" r="35" fill="#0b1d39"/>
+          <rect x="40" y="120" width="120" height="50" rx="25" fill="#0b1d39"/>
+          <path d="M70 95 Q100 115 130 95" stroke="#fff" stroke-width="4" fill="none"/>
+        </svg>
+      </div>
+      <h3>Content Creation</h3>
+      <p>Scroll-stopping visuals and videos crafted to convert attention into action.</p>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-card premium">
+      <div class="avatar">
+        <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" fill="#0b1d39"/>
+          <circle cx="100" cy="80" r="35" fill="#facc15"/>
+          <rect x="45" y="120" width="110" height="50" rx="25" fill="#facc15"/>
+          <path d="M75 95 L95 105 L125 85" stroke="#0b1d39" stroke-width="4" fill="none"/>
+        </svg>
+      </div>
+      <h3>Training & Consulting</h3>
+      <p>Hands-on guidance to help individuals and brands master digital marketing.</p>
+    </div>
+
   </div>
 </section>
 
@@ -576,5 +719,6 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 </script>
 </body>
 </html>
+
 
 
