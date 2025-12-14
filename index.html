@@ -432,18 +432,17 @@
     .testimonial-swiper { padding: 2.5rem 0 4rem; }
 
     .testimonial-card {
-      background: #ffffff;
-      color: #0f172a;
-      border-radius: 26px;
-      padding: 2.8rem 2.2rem;
-      text-align: center;
-      box-shadow:
-        0 25px 50px rgba(0,0,0,0.08),
-        0 0 0 1px rgba(0,0,0,0.05);
-      transform: scale(0.88);
-      transition: all 0.45s cubic-bezier(.4,0,.2,1);
-      opacity: 0.5;
-    }
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 28px;
+  padding: 3rem 2.4rem;
+  text-align: center;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.12);
+  transform: scale(0.9);
+  transition: all 0.45s cubic-bezier(.4,0,.2,1);
+  opacity: 0.6;
+}
 
     .testimonial-card p { color: #475569; font-size: 1.05rem; }
     .testimonial-card h4 { margin-top: 1rem; font-weight: 700; }
@@ -460,13 +459,12 @@
     }
 
     /* ACTIVE SLIDE MAGIC */
-    .swiper-slide-active .testimonial-card {
-      transform: scale(1);
-      opacity: 1;
-      box-shadow:
-        0 35px 70px rgba(0,0,0,0.15),
-        0 0 0 1px rgba(0,0,0,0.08);
-    }
+.swiper-slide-active .testimonial-card {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow:
+    0 40px 90px rgba(0,0,0,0.18);
+}
 
     /* Nearby slides */
     .swiper-slide-prev .testimonial-card,
@@ -681,29 +679,48 @@
     <h2>Student Testimonials</h2>
     <p>Real people. Real results.</p>
   </div>
+
   <div class="swiper testimonial-swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide testimonial-card">
-        <img src="logo.jpg">
-        <p>I learnt consistency, strategy and confidence.</p>
-        <h4>Jedidiah</h4><span>★★★★★</span>
+
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <img src="logo.jpg" alt="Student">
+          <p>I learnt consistency, strategy and confidence.</p>
+          <h4>Jedidiah</h4>
+          <span>★★★★★</span>
+        </div>
       </div>
-      <div class="swiper-slide testimonial-card">
-        <img src="logo.jpg">
-        <p>This training changed my career path.</p>
-        <h4>Alfred</h4><span>★★★★★</span>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <img src="logo.jpg" alt="Student">
+          <p>This training changed my career path.</p>
+          <h4>Alfred</h4>
+          <span>★★★★★</span>
+        </div>
       </div>
-      <div class="swiper-slide testimonial-card">
-        <img src="logo.jpg">
-        <p>I now understand ads, Canva and audience targeting.</p>
-        <h4>Genevieve</h4><span>★★★★★</span>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <div class="testimonial-card">
+          <img src="logo.jpg" alt="Student">
+          <p>I now understand ads, Canva and audience targeting.</p>
+          <h4>Genevieve</h4>
+          <span>★★★★★</span>
+        </div>
       </div>
-      
+
     </div>
+
     <div class="swiper-pagination testimonial-pagination"></div>
   </div>
 </section>
 
+
+  
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
@@ -752,7 +769,11 @@ new Swiper('.testimonial-swiper', {
   grabCursor: true,
   autoplay: { delay: 3500, disableOnInteraction: false },
   pagination: { el: '.testimonial-pagination', clickable: true },
-  breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+  watchSlidesProgress: true,   // ✅ ADD THIS
+  breakpoints: {
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
+  }
 });
 
 // Workflow cards observer
@@ -766,6 +787,7 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
