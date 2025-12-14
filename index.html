@@ -122,34 +122,104 @@
 
     
     /* Mobile Menu */
-    .mobile-menu {
-      position: fixed;
-      inset: 0;
-      background: var(--navy);
-      padding: 6rem 2rem;
-      transform: translateX(100%);
-      transition: .4s ease;
-      z-index: 998;
-      display: flex;
-      flex-direction: column;
-    }
+/* ================= UPGRADED BRAND SIDEBAR ================= */
 
-    .mobile-menu a {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 1.6rem;
-    }
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    #0b1d39 0%,
+    #050d1f 100%
+  );
+  padding: 5.5rem 2rem 2.5rem;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(18px);
+}
 
-    .mobile-socials {
-      margin-top: auto;
-      display: flex;
-      gap: 1.5rem;
-      color: var(--muted);
-    }
+/* Active */
+.mobile-menu.active {
+  transform: translateX(0);
+}
 
-    .mobile-menu.active {
-      transform: translateX(0);
-    }
+/* Brand header */
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 3rem;
+}
+
+.mobile-brand img {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  padding: 6px;
+}
+
+.mobile-brand span {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #facc15;
+}
+
+/* Links */
+.mobile-menu a {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1.8rem;
+  color: #e5e7eb;
+  position: relative;
+  width: fit-content;
+}
+
+/* Hover underline */
+.mobile-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: #facc15;
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+.mobile-menu a:hover::after {
+  width: 100%;
+}
+
+/* CTA Button */
+.mobile-cta {
+  margin-top: 2.5rem;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 16px;
+  background: #facc15;
+  color: #000;
+  font-weight: 800;
+}
+
+/* Socials */
+.mobile-socials {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.mobile-socials span {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
 
     /* ================= HERO ================= */
     .hero {
@@ -511,16 +581,32 @@
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
+
+  <!-- Brand -->
+  <div class="mobile-brand">
+    <img src="logo.jpg" alt="MAJ Media Logo">
+    <span>MAJ Media</span>
+  </div>
+
+  <!-- Navigation -->
   <a href="services.html">Services</a>
   <a href="training.html">Training</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="testimonials.html">Testimonials</a>
   <a href="contact.html">Contact</a>
+
+  <!-- CTA -->
+  <a href="https://wa.link/j1qjj7" target="_blank" class="mobile-cta">
+    Book a Consultation
+  </a>
+
+  <!-- Socials -->
   <div class="mobile-socials">
     <span>Instagram</span>
-    <span>Twitter</span>
     <span>LinkedIn</span>
+    <span>Facebook</span>
   </div>
+
 </div>
 
 <section class="hero">
@@ -719,6 +805,7 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
