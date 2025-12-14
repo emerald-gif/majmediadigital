@@ -101,6 +101,26 @@
       border-radius: 4px;
     }
 
+
+     /* Hamburger animation */
+.hamburger span {
+  transition: all 0.4s ease;
+}
+
+/* When menu is active → turn into X */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+    
     /* Mobile Menu */
     .mobile-menu {
       position: fixed;
@@ -526,9 +546,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-document.getElementById("hamburger").onclick = () =>
-  document.getElementById("mobileMenu").classList.toggle("active");
+const hamburger = document.getElementById("hamburger");
+const mobileMenu = document.getElementById("mobileMenu");
 
+hamburger.onclick = () => {
+  hamburger.classList.toggle("active");
+  mobileMenu.classList.toggle("active");
+};
 new Swiper('.testimonial-swiper', {
   slidesPerView: 1,
   spaceBetween: 30,
@@ -552,4 +576,5 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 </script>
 </body>
 </html>
+
 
