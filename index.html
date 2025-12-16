@@ -631,121 +631,77 @@
   /* ===== AI CHAT ASSISTANT ===== */
 .chat-launcher {
   position: fixed;
-  right: 24px;
-  bottom: 110px; /* NOT too bottom – like your image */
+  right: 16px;
+  bottom: env(safe-area-inset-bottom, 16px);
+  margin-bottom: 72px; /* keeps it above mobile UI */
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.9rem 1.6rem;
+  gap: 0.6rem;
+  padding: 0.85rem 1.3rem;
   background: #1e3a8a;
   color: #fff;
   border-radius: 999px;
   border: none;
   font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-  transition: all 0.35s ease;
+  font-size: 0.9rem;
+  z-index: 10000;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
 }
 
 .chat-launcher svg {
-  width: 24px;
-  height: 24px;
-}
-
-.chat-launcher:hover {
-  transform: translateY(-4px);
+  width: 22px;
+  height: 22px;
 }
 
 
+                               
 .ai-chatbox {
   position: fixed;
-  right: 24px;
-  bottom: 110px;
-  width: 360px;
-  height: 520px;
+  inset: auto 0 0 0;
+  height: 82vh;
   background: #000;
-  border-radius: 22px;
+  border-radius: 18px 18px 0 0;
   display: none;
   flex-direction: column;
-  z-index: 10000;
-  box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+  z-index: 10001;
+  box-shadow: 0 -20px 60px rgba(0,0,0,0.6);
+  }
+
+
+      
+@media (min-width: 768px) {
+  .ai-chatbox {
+    right: 24px;
+    bottom: 100px;
+    left: auto;
+    width: 360px;
+    height: 520px;
+    border-radius: 22px;
+  }
 }
+
+
 
 .ai-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
+  padding: 0.9rem 1rem;
   background: #0b0b0b;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.ai-title {
-  display: flex;
-  gap: 0.7rem;
-  align-items: center;
-}
-
-.ai-title svg {
-  width: 26px;
-}
-
-.ai-title small {
-  color: #9ca3af;
-  font-size: 0.75rem;
-}
-
-.ai-messages {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
-}
-
-.ai-message {
-  max-width: 85%;
-  padding: 0.8rem 1rem;
-  border-radius: 16px;
-  margin-bottom: 0.8rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.ai-message.bot {
-  background: #111;
-  color: #e5e7eb;
-}
-
-.ai-message.user {
-  background: #facc15;
-  color: #000;
-  margin-left: auto;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .ai-input {
+  padding: 0.75rem;
+  background: #0b0b0b;
   display: flex;
-  padding: 0.8rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  gap: 0.5rem;
 }
 
 .ai-input input {
   flex: 1;
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 0.9rem;
   border-radius: 14px;
   border: none;
-}
-
-.ai-input button {
-  margin-left: 0.5rem;
-  background: #facc15;
-  border-radius: 14px;
-  border: none;
-  padding: 0 1rem;
-}
-
-
-
+  font-size: 16px; /* prevents mobile zoom */
+}      
 
       
 
@@ -959,11 +915,12 @@
 <!-- ===== AI CHAT SVG BUTTON ===== -->
 <button class="chat-launcher" id="aiToggle">
   <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 2a10 10 0 0 0-6.3 17.7L4 22l2.6-.7A10 10 0 1 0 12 2z"
-      fill="#facc15"/>
-    <path d="M8.5 11.5h7M8.5 8.5h7M8.5 14.5h4"
-      stroke="#0b1d39" stroke-width="1.6" stroke-linecap="round"/>
-  </svg>
+  <path fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round"
+    d="M4 12a8 8 0 0 1 16 0"/>
+  <rect x="3" y="12" width="4" height="6" rx="2" fill="#facc15"/>
+  <rect x="17" y="12" width="4" height="6" rx="2" fill="#facc15"/>
+  <path d="M12 18c0 2-2 3-4 3" stroke="#facc15" stroke-width="2" stroke-linecap="round"/>
+</svg>
   <span>Talk with Us</span>
 </button>
 
@@ -1293,6 +1250,7 @@ function random(arr) {
 </script>
 </body>
 </html>
+
 
 
 
