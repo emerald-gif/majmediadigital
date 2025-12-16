@@ -629,11 +629,12 @@
 
 
   /* ===== AI CHAT ASSISTANT ===== */
+/* ================= CHAT LAUNCHER (FLOATING BUTTON) ================= */
+
 .chat-launcher {
   position: fixed;
   right: 16px;
-  bottom: env(safe-area-inset-bottom, 16px);
-  margin-bottom: 72px; /* keeps it above mobile UI */
+  bottom: calc(env(safe-area-inset-bottom, 16px) + 72px);
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -654,21 +655,66 @@
 }
 
 
-                               
+/* ================= CHATBOX (MOBILE FIRST – BOTTOM SHEET) ================= */
+
 .ai-chatbox {
   position: fixed;
   inset: auto 0 0 0;
-  height: 82vh;
+  height: 82dvh;
+  max-height: 100dvh;
   background: #000;
   border-radius: 18px 18px 0 0;
   display: none;
   flex-direction: column;
   z-index: 10001;
   box-shadow: 0 -20px 60px rgba(0,0,0,0.6);
-  }
+  overflow: hidden;
+}
 
 
-      
+/* ================= HEADER ================= */
+
+.ai-header {
+  padding: 0.9rem 1rem;
+  background: #0b0b0b;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+
+/* ================= MESSAGES AREA (SCROLLABLE) ================= */
+
+.ai-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* ================= INPUT AREA (KEYBOARD SAFE) ================= */
+
+.ai-input {
+  position: sticky;
+  bottom: 0;
+  padding: 0.75rem;
+  background: #0b0b0b;
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.ai-input input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px; /* prevents mobile zoom */
+}
+
+
+/* ================= DESKTOP UPGRADE ================= */
+
 @media (min-width: 768px) {
   .ai-chatbox {
     right: 24px;
@@ -679,30 +725,6 @@
     border-radius: 22px;
   }
 }
-
-
-
-.ai-header {
-  padding: 0.9rem 1rem;
-  background: #0b0b0b;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.ai-input {
-  padding: 0.75rem;
-  background: #0b0b0b;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.ai-input input {
-  flex: 1;
-  padding: 0.7rem 0.9rem;
-  border-radius: 14px;
-  border: none;
-  font-size: 16px; /* prevents mobile zoom */
-}      
-
       
 
       
@@ -1250,6 +1272,7 @@ function random(arr) {
 </script>
 </body>
 </html>
+
 
 
 
