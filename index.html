@@ -1423,23 +1423,6 @@ function random(arr) {
 
 
 
-function addMsg(text, who = "bot") {
-  const div = document.createElement("div");
-  div.className = `ai-message ${who}`;
-  aiMessages.appendChild(div);
-
-  if(who === "bot") {
-    let i = 0;
-    const interval = setInterval(() => {
-      div.innerText += text[i++];
-      if(i === text.length) clearInterval(interval);
-      aiMessages.scrollTop = aiMessages.scrollHeight;
-    }, 15);
-  } else {
-    div.innerText = text;
-    aiMessages.scrollTop = aiMessages.scrollHeight;
-  }
-  }
 
 
 
@@ -1457,6 +1440,7 @@ document.getElementById("subscribeBtnBar").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
