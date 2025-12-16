@@ -629,76 +629,92 @@
 
 
   /* ===== AI CHAT ASSISTANT ===== */
-.ai-chat-toggle {
+.chat-launcher {
   position: fixed;
-  bottom: 22px;
-  right: 22px;
-  background: #1e3a8a;
-  color: #fff;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
+  right: 24px;
+  bottom: 110px; /* NOT too bottom – like your image */
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 22px;
+  gap: 0.8rem;
+  padding: 0.9rem 1.6rem;
+  background: #1e3a8a;
+  color: #fff;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
   z-index: 9999;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+  transition: all 0.35s ease;
 }
+
+.chat-launcher svg {
+  width: 24px;
+  height: 24px;
+}
+
+.chat-launcher:hover {
+  transform: translateY(-4px);
+}
+
 
 .ai-chatbox {
   position: fixed;
-  bottom: 90px;
-  right: 22px;
-  width: 340px;
-  max-height: 520px;
-  background: #0b1d39;
+  right: 24px;
+  bottom: 110px;
+  width: 360px;
+  height: 520px;
+  background: #000;
   border-radius: 22px;
   display: none;
   flex-direction: column;
-  overflow: hidden;
-  z-index: 9999;
-  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+  z-index: 10000;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.7);
 }
 
 .ai-header {
-  background: #1e3a8a;
-  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem;
+  background: #0b0b0b;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.ai-header p {
-  font-size: .85rem;
-  color: #c7d2fe;
+.ai-title {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
 }
 
-.ai-header button {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
+.ai-title svg {
+  width: 26px;
+}
+
+.ai-title small {
+  color: #9ca3af;
+  font-size: 0.75rem;
 }
 
 .ai-messages {
+  flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  flex: 1;
 }
 
 .ai-message {
-  margin-bottom: .8rem;
-  padding: .8rem 1rem;
+  max-width: 85%;
+  padding: 0.8rem 1rem;
   border-radius: 16px;
-  font-size: .9rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .ai-message.bot {
-  background: rgba(255,255,255,.08);
+  background: #111;
+  color: #e5e7eb;
 }
 
 .ai-message.user {
@@ -709,27 +725,27 @@
 
 .ai-input {
   display: flex;
-  padding: .8rem;
-  border-top: 1px solid rgba(255,255,255,.1);
+  padding: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .ai-input input {
   flex: 1;
-  border: none;
+  padding: 0.7rem 1rem;
   border-radius: 14px;
-  padding: .7rem 1rem;
-  outline: none;
+  border: none;
 }
 
 .ai-input button {
-  margin-left: .6rem;
+  margin-left: 0.5rem;
   background: #facc15;
-  border: none;
   border-radius: 14px;
-  padding: 0 .9rem;
-  font-size: 16px;
-  cursor: pointer;
+  border: none;
+  padding: 0 1rem;
 }
+
+
+
 
       
 
@@ -941,18 +957,28 @@
 
 <!-- ================= AI BOOKING ASSISTANT ================= -->
 <!-- ===== AI CHAT SVG BUTTON ===== -->
-<button class="ai-chat-svg-btn" id="aiToggle" aria-label="Talk with Us">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-    <path fill="#facc15" d="M12 2a10 10 0 0 0-6.3 17.7L4 22l2.6-.7A10 10 0 1 0 12 2Zm-1 14h2v-2h-2v2Zm0-4h2V6h-2v6Z"/>
+<button class="chat-launcher" id="aiToggle">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-6.3 17.7L4 22l2.6-.7A10 10 0 1 0 12 2z"
+      fill="#facc15"/>
+    <path d="M8.5 11.5h7M8.5 8.5h7M8.5 14.5h4"
+      stroke="#0b1d39" stroke-width="1.6" stroke-linecap="round"/>
   </svg>
   <span>Talk with Us</span>
 </button>
 
+
 <div class="ai-chatbox" id="aiChatbox">
   <div class="ai-header">
-    <div>
-      <strong>Talk with Us</strong>
-      <p>Choose voice or text</p>
+    <div class="ai-title">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 0 0-6.3 17.7L4 22l2.6-.7A10 10 0 1 0 12 2z"
+          fill="#facc15"/>
+      </svg>
+      <div>
+        <strong>Talk with Us</strong>
+        <small>Choose voice or text</small>
+      </div>
     </div>
     <button id="closeChat">✕</button>
   </div>
@@ -961,17 +987,18 @@
     <div class="ai-message bot">
       Hi there 👋  
       I’m your MAJ Media assistant.  
-      I’d be happy to help — what would you like to know today?
+      How can I help you today?
     </div>
   </div>
 
   <div class="ai-input">
-    <input type="text" id="aiInput" placeholder="Type your message..." />
+    <input id="aiInput" placeholder="Type your message..." />
     <button id="sendAI">➤</button>
   </div>
 </div>
 
 
+  
   
 
 
@@ -1070,8 +1097,8 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 
 
 
-  
 
+/* ================= CORE ELEMENTS ================= */
 const aiToggle = document.getElementById("aiToggle");
 const aiChatbox = document.getElementById("aiChatbox");
 const closeChat = document.getElementById("closeChat");
@@ -1081,73 +1108,182 @@ const aiMessages = document.getElementById("aiMessages");
 
 const WHATSAPP_LINK = "https://wa.link/j1qjj7";
 
+/* ================= STATE MEMORY ================= */
+const state = {
+  greeted: false,
+  serviceAsked: false,
+  pricingAsked: false,
+  bookingIntent: false,
+  whatsappSuggested: false
+};
+
+/* ================= UI EVENTS ================= */
 aiToggle.onclick = () => aiChatbox.style.display = "flex";
 closeChat.onclick = () => aiChatbox.style.display = "none";
+sendAI.onclick = sendMessage;
+aiInput.addEventListener("keypress", e => e.key === "Enter" && sendMessage());
 
-sendAI.onclick = handleMessage;
-aiInput.addEventListener("keypress", e => {
-  if (e.key === "Enter") handleMessage();
-});
-
-function handleMessage() {
-  const text = aiInput.value.trim();
-  if (!text) return;
-
-  addMessage(text, "user");
-  aiInput.value = "";
-
-  setTimeout(() => botReply(text.toLowerCase()), 700);
-}
-
-function addMessage(text, sender) {
-  const msg = document.createElement("div");
-  msg.className = `ai-message ${sender}`;
-  msg.innerText = text;
-  aiMessages.appendChild(msg);
+/* ================= HELPERS ================= */
+function addMsg(text, who = "bot") {
+  const div = document.createElement("div");
+  div.className = `ai-message ${who}`;
+  div.innerText = text;
+  aiMessages.appendChild(div);
   aiMessages.scrollTop = aiMessages.scrollHeight;
 }
 
-function botReply(message) {
+function addWhatsAppCTA() {
+  if (state.whatsappSuggested) return;
+  state.whatsappSuggested = true;
 
-  // Detect booking intent
-  const bookingKeywords = [
-    "book", "consultation", "talk", "call",
-    "get started", "pricing", "strategy", "speak"
-  ];
+  const btn = document.createElement("button");
+  btn.className = "whatsapp-cta";
+  btn.innerText = "Continue on WhatsApp";
+  btn.onclick = () => window.open(WHATSAPP_LINK, "_blank");
+  aiMessages.appendChild(btn);
+}
 
-  const wantsBooking = bookingKeywords.some(word => message.includes(word));
+/* ================= USER MESSAGE ================= */
+function sendMessage() {
+  const text = aiInput.value.trim();
+  if (!text) return;
 
-  if (wantsBooking) {
-    addMessage(
-      "That’s great — I’d be happy to help you with that 😊\n\n" +
-      "To get you booked properly, I’ll just need a few details from you:\n" +
+  addMsg(text, "user");
+  aiInput.value = "";
+
+  setTimeout(() => reply(text.toLowerCase()), 700);
+}
+
+/* ================= RESPONSE ENGINE ================= */
+function reply(msg) {
+
+  /* ---- INTENT DETECTION ---- */
+  const greetings = /(hi|hello|hey|good morning|good afternoon)/i.test(msg);
+  const serviceIntent = /(service|what do you do|offer|help)/i.test(msg);
+  const pricingIntent = /(price|cost|how much|rate|budget)/i.test(msg);
+  const bookingIntent = /(book|consult|call|talk|get started|strategy)/i.test(msg);
+  const adsIntent = /(ads|advert|promotion|campaign)/i.test(msg);
+  const socialIntent = /(social media|instagram|facebook|tiktok)/i.test(msg);
+  const trainingIntent = /(training|course|learn|class)/i.test(msg);
+  const whatsappIntent = /(whatsapp|chat there|move to whatsapp)/i.test(msg);
+
+  /* ---- GREETING ---- */
+  if (greetings && !state.greeted) {
+    state.greeted = true;
+    addMsg(
+      random([
+        "Hello 👋 Welcome to MAJ Media Digital.\nHow can I assist you today?",
+        "Hi there 😊 I’m here to help.\nWhat would you like to know?",
+        "Hey 👋 Glad you reached out.\nWhat are you looking for?"
+      ])
+    );
+    return;
+  }
+
+  /* ---- SERVICES OVERVIEW ---- */
+  if (serviceIntent && !state.serviceAsked) {
+    state.serviceAsked = true;
+    addMsg(
+      "We help brands grow and convert online through:\n\n" +
+      "• Social Media Management\n" +
+      "• Sponsored Ads & Campaigns\n" +
+      "• Content Creation\n" +
+      "• Digital Marketing Training\n\n" +
+      "Which of these are you most interested in?"
+    );
+    return;
+  }
+
+  /* ---- ADS ---- */
+  if (adsIntent) {
+    addMsg(
+      "Our ads service focuses on real results — leads, sales, and visibility.\n\n" +
+      "We manage:\n" +
+      "• Meta Ads (Facebook & Instagram)\n" +
+      "• TikTok Ads\n" +
+      "• Strategy, creatives & optimization\n\n" +
+      "Is this for a business, brand, or personal project?"
+    );
+    return;
+  }
+
+  /* ---- SOCIAL MEDIA ---- */
+  if (socialIntent) {
+    addMsg(
+      "We handle social media end-to-end:\n\n" +
+      "• Content planning & posting\n" +
+      "• Page growth & engagement\n" +
+      "• Community management\n\n" +
+      "Are you starting from scratch or improving an existing page?"
+    );
+    return;
+  }
+
+  /* ---- TRAINING ---- */
+  if (trainingIntent) {
+    addMsg(
+      "Yes 👍 We also offer hands-on digital marketing training.\n\n" +
+      "You’ll learn:\n" +
+      "• Ads setup & strategy\n" +
+      "• Content & growth tactics\n" +
+      "• Tools & real examples\n\n" +
+      "Is this for personal skill-building or business use?"
+    );
+    return;
+  }
+
+  /* ---- PRICING ---- */
+  if (pricingIntent && !state.pricingAsked) {
+    state.pricingAsked = true;
+    addMsg(
+      "Pricing depends on a few things:\n\n" +
+      "• The service you need\n" +
+      "• Project size & duration\n" +
+      "• Your goals (leads, sales, growth)\n\n" +
+      "If you want something accurate, a quick consultation helps."
+    );
+    if (!state.whatsappSuggested) addWhatsAppCTA();
+    return;
+  }
+
+  /* ---- BOOKING ---- */
+  if (bookingIntent) {
+    state.bookingIntent = true;
+    addMsg(
+      "Great choice 👍\n\n" +
+      "To book a session, I’ll need:\n" +
       "• Your full name\n" +
-      "• Your phone number (WhatsApp works best)\n" +
-      "• A preferred day and time\n\n" +
-      "No rush at all — take your time.\n\n" +
-      "You can also chat directly with us on WhatsApp — it’s usually the fastest way:\n" +
-      WHATSAPP_LINK,
-      "bot"
+      "• WhatsApp number\n" +
+      "• What you want to discuss\n\n" +
+      "You can continue here or switch to WhatsApp for faster coordination."
     );
+    addWhatsAppCTA();
     return;
   }
 
-  // Services info
-  if (message.includes("service") || message.includes("offer")) {
-    addMessage(
-      "We help brands grow through social media management, sponsored ads, content creation, and training.\n\n" +
-      "If you’d like, we can talk through what would work best for your brand — just let me know 😊",
-      "bot"
+  /* ---- WHATSAPP DIRECT REQUEST ---- */
+  if (whatsappIntent) {
+    addMsg(
+      "Sure 😊 You can continue the conversation on WhatsApp.\n" +
+      "Just tap the button below and we’ll take it from there."
     );
+    addWhatsAppCTA();
     return;
   }
 
-  // Default friendly response
-  addMessage(
-    "No worries at all — I’m here to help 😊\n\n" +
-    "You can ask me about our services, pricing, or how to book a consultation.",
-    "bot"
+  /* ---- FALLBACK (SMART, NOT DUMB) ---- */
+  addMsg(
+    random([
+      "I want to make sure I understand you correctly 😊\nCould you tell me a bit more?",
+      "Thanks for that.\nAre you asking about services, pricing, or booking a consultation?",
+      "No problem 👍\nLet me know what you’d like help with."
+    ])
   );
+}
+
+/* ================= UTIL ================= */
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 
@@ -1157,6 +1293,7 @@ function botReply(message) {
 </script>
 </body>
 </html>
+
 
 
 
