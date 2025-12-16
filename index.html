@@ -768,6 +768,72 @@
 }
       
 
+
+
+/* ================= NEWSLETTER ================= */
+.newsletter {
+  background: #0b1d39; /* dark/navy background */
+  padding: 4rem 1.5rem;
+  border-radius: 20px;
+  margin: 4rem auto 2rem;
+  max-width: 900px;
+  text-align: center;
+  border: 1px solid rgba(250,204,21,0.25);
+  box-shadow: 0 12px 30px rgba(250,204,21,0.15);
+}
+
+.newsletter-content h2 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #facc15;
+  margin-bottom: 1rem;
+}
+
+.newsletter-content p {
+  font-size: 1.05rem;
+  color: #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.newsletter-form input {
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  width: 250px;
+  max-width: 100%;
+  background: #1f2937;
+  color: #fff;
+}
+
+.newsletter-form input::placeholder {
+  color: #94a3b8;
+}
+
+.newsletter-form button {
+  padding: 0.95rem 1.6rem;
+  border-radius: 14px;
+  border: none;
+  background: #facc15;
+  color: #0b1d39;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.newsletter-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(250,204,21,0.35);
+}
+
+  
       
   </style>
 </head>
@@ -1018,7 +1084,17 @@
 </div>
 
 
-  
+  <!-- ================= NEWSLETTER ================= -->
+<section class="newsletter">
+  <div class="newsletter-content">
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>Get the latest marketing tips, growth strategies, and updates straight to your inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Enter your email" id="newsletterEmail">
+      <button id="subscribeBtn">Subscribe</button>
+    </div>
+  </div>
+</section>
   
 
 
@@ -1352,9 +1428,24 @@ function random(arr) {
 }
   
 
+
+
+document.getElementById("subscribeBtn").addEventListener("click", () => {
+  const email = document.getElementById("newsletterEmail").value.trim();
+  if (!email) {
+    alert("Please enter a valid email!");
+    return;
+  }
+  alert(`Thanks for subscribing! You entered: ${email}`);
+  document.getElementById("newsletterEmail").value = "";
+});
+
+
+  
 </script>
 </body>
 </html>
+
 
 
 
