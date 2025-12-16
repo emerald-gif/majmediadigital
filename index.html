@@ -771,66 +771,61 @@
 
 
 /* ================= NEWSLETTER ================= */
-.newsletter {
-  background: #0b1d39; /* dark/navy background */
-  padding: 4rem 1.5rem;
-  border-radius: 20px;
-  margin: 4rem auto 2rem;
-  max-width: 900px;
-  text-align: center;
-  border: 1px solid rgba(250,204,21,0.25);
-  box-shadow: 0 12px 30px rgba(250,204,21,0.15);
-}
-
-.newsletter-content h2 {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #facc15;
-  margin-bottom: 1rem;
-}
-
-.newsletter-content p {
-  font-size: 1.05rem;
-  color: #e5e7eb;
-  margin-bottom: 2rem;
-}
-
-.newsletter-form {
+/* ================= COMPACT NEWSLETTER ================= */
+.newsletter-bar {
+  background: #0b1d39;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 0.8rem 1.5rem;
   display: flex;
-  justify-content: center;
-  gap: 0.6rem;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 14px 14px 0 0; /* slightly rounded top corners */
 }
 
-.newsletter-form input {
-  padding: 0.9rem 1rem;
+.newsletter-bar p {
+  margin: 0;
+  color: #e5e7eb;
+  font-weight: 500;
+}
+
+.newsletter-bar-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletter-bar input {
+  padding: 0.5rem 0.8rem;
   border-radius: 14px;
   border: none;
-  font-size: 1rem;
-  width: 250px;
+  font-size: 0.95rem;
+  width: 180px;
   max-width: 100%;
   background: #1f2937;
   color: #fff;
 }
 
-.newsletter-form input::placeholder {
+.newsletter-bar input::placeholder {
   color: #94a3b8;
 }
 
-.newsletter-form button {
-  padding: 0.95rem 1.6rem;
-  border-radius: 14px;
+.newsletter-bar button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px; /* fully curvy */
   border: none;
   background: #facc15;
   color: #0b1d39;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.35s ease;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 }
 
-.newsletter-form button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(250,204,21,0.35);
+.newsletter-bar button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(250,204,21,0.35);
 }
 
   
@@ -1085,14 +1080,12 @@
 
 
   <!-- ================= NEWSLETTER ================= -->
-<section class="newsletter">
-  <div class="newsletter-content">
-    <h2>Subscribe to Our Newsletter</h2>
-    <p>Get the latest marketing tips, growth strategies, and updates straight to your inbox.</p>
-    <div class="newsletter-form">
-      <input type="email" placeholder="Enter your email" id="newsletterEmail">
-      <button id="subscribeBtn">Subscribe</button>
-    </div>
+<!-- ================= COMPACT NEWSLETTER ================= -->
+<section class="newsletter-bar">
+  <p>Subscribe to our newsletter for updates:</p>
+  <div class="newsletter-bar-form">
+    <input type="email" placeholder="Enter your email" id="newsletterEmailBar">
+    <button id="subscribeBtnBar">Subscribe</button>
   </div>
 </section>
   
@@ -1430,14 +1423,11 @@ function random(arr) {
 
 
 
-document.getElementById("subscribeBtn").addEventListener("click", () => {
-  const email = document.getElementById("newsletterEmail").value.trim();
-  if (!email) {
-    alert("Please enter a valid email!");
-    return;
-  }
-  alert(`Thanks for subscribing! You entered: ${email}`);
-  document.getElementById("newsletterEmail").value = "";
+document.getElementById("subscribeBtnBar").addEventListener("click", () => {
+  const email = document.getElementById("newsletterEmailBar").value.trim();
+  if (!email) return alert("Please enter a valid email!");
+  alert(`Subscribed! You entered: ${email}`);
+  document.getElementById("newsletterEmailBar").value = "";
 });
 
 
@@ -1445,6 +1435,7 @@ document.getElementById("subscribeBtn").addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
