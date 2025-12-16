@@ -1119,6 +1119,7 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 
 
 /* ================= CORE ELEMENTS ================= */
+/* ================= CORE ELEMENTS ================= */
 const aiToggle = document.getElementById("aiToggle");
 const aiChatbox = document.getElementById("aiChatbox");
 const closeChat = document.getElementById("closeChat");
@@ -1134,7 +1135,12 @@ const state = {
   serviceAsked: false,
   pricingAsked: false,
   bookingIntent: false,
-  whatsappSuggested: false
+  whatsappSuggested: false,
+  context: {
+    lastQuestion: null, // tracks the last bot question for follow-up answers
+    lastService: null,
+    lastIntent: null
+  }
 };
 
 /* ================= UI EVENTS ================= */
@@ -1171,13 +1177,82 @@ function sendMessage() {
   addMsg(text, "user");
   aiInput.value = "";
 
-  setTimeout(() => reply(text.toLowerCase()), 700);
+  setTimeout(() => reply(text.toLowerCase()), 500);
 }
 
 /* ================= RESPONSE ENGINE ================= */
 function reply(msg) {
 
-  /* ---- INTENT DETECTION ---- */
+  /* ==== HANDLE CONTEXT-SENSITIVE ANSWERS ==== */
+  if (state.context.lastQuestion) {
+    switch(state.context.lastQuestion) {
+
+      case "serviceChoice":
+        if (/social media/i.test(msg)) {
+          addMsg("Awesome! Social Media Management is key for brand growth. Do you want help with content or growth strategy?");
+          state.context.lastService = "social media";
+        } else if (/ads|campaign/i.test(msg)) {
+          addMsg("Great! Sponsored Ads can generate leads and visibility. Are you targeting Facebook, Instagram, or TikTok?");
+          state.context.lastService = "ads";
+        } else if (/content/i.test(msg)) {
+          addMsg("Perfect! Content creation helps you engage your audience. Is this for a brand or personal project?");
+          state.context.lastService = "content";
+          state.context.lastQuestion = "brandOrPersonal"; // next question
+          return;
+        } else if (/training/i.test(msg)) {
+          addMsg("Training is excellent! Will this be for personal skill-building or for your team/business?");
+          state.context.lastService = "training";
+          state.context.lastQuestion = "trainingType"; // next question
+          return;
+        } else {
+          addMsg("Could you clarify which service you are interested in? Social Media, Ads, Content, or Training?");
+          return; // keep asking until user answers
+        }
+        state.context.lastQuestion = null; // reset after handled
+        return;
+
+      case "brandOrPersonal":
+        if (/brand|business/i.test(msg)) {
+          addMsg("Great! We can tailor strategies specifically for your brand to maximize reach and conversion.");
+        } else if (/personal/i.test(msg)) {
+          addMsg("Perfect! We’ll focus on strategies that help you personally grow and manage your content effectively.");
+        } else {
+          addMsg("Could you tell me if this is for a brand/business or for personal use?");
+          return;
+        }
+        state.context.lastQuestion = null;
+        return;
+
+      case "trainingType":
+        if (/personal/i.test(msg)) {
+          addMsg("Excellent! We’ll guide you step by step for personal skill-building.");
+        } else if (/team|business/i.test(msg)) {
+          addMsg("Great! The training will be customized for business needs and team development.");
+        } else {
+          addMsg("Is this training for personal learning or for your business/team?");
+          return;
+        }
+        state.context.lastQuestion = null;
+        return;
+
+      case "pricing":
+        if (/service|social media|ads|content|training/i.test(msg)) {
+          addMsg("Pricing depends on the service, project size, and goals. For an exact quote, a quick consultation helps.");
+          addWhatsAppCTA();
+        } else {
+          addMsg("Can you specify which service or project you want pricing for?");
+          return;
+        }
+        state.context.lastQuestion = null;
+        return;
+
+      default:
+        state.context.lastQuestion = null;
+        break;
+    }
+  }
+
+  /* ==== INTENT DETECTION ==== */
   const greetings = /(hi|hello|hey|good morning|good afternoon)/i.test(msg);
   const serviceIntent = /(service|what do you do|offer|help)/i.test(msg);
   const pricingIntent = /(price|cost|how much|rate|budget)/i.test(msg);
@@ -1187,132 +1262,100 @@ function reply(msg) {
   const trainingIntent = /(training|course|learn|class)/i.test(msg);
   const whatsappIntent = /(whatsapp|chat there|move to whatsapp)/i.test(msg);
 
-  /* ---- GREETING ---- */
+  /* ==== GREETING ==== */
   if (greetings && !state.greeted) {
     state.greeted = true;
-    addMsg(
-      random([
-        "Hello 👋 Welcome to MAJ Media Digital.\nHow can I assist you today?",
-        "Hi there 😊 I’m here to help.\nWhat would you like to know?",
-        "Hey 👋 Glad you reached out.\nWhat are you looking for?"
-      ])
-    );
+    addMsg(random([
+      "Hello 👋 Welcome to MAJ Media Digital.\nHow can I assist you today?",
+      "Hi there 😊 I’m here to help.\nWhat would you like to know?",
+      "Hey 👋 Glad you reached out.\nWhat are you looking for?"
+    ]));
     return;
   }
 
-  /* ---- SERVICES OVERVIEW ---- */
+  /* ==== SERVICES OVERVIEW ==== */
   if (serviceIntent && !state.serviceAsked) {
     state.serviceAsked = true;
-    addMsg(
-      "We help brands grow and convert online through:\n\n" +
+    addMsg("We help brands grow and convert online through:\n\n" +
       "• Social Media Management\n" +
       "• Sponsored Ads & Campaigns\n" +
       "• Content Creation\n" +
       "• Digital Marketing Training\n\n" +
-      "Which of these are you most interested in?"
-    );
+      "Which of these are you most interested in?");
+    state.context.lastQuestion = "serviceChoice";
     return;
   }
 
-  /* ---- ADS ---- */
+  /* ==== ADS ==== */
   if (adsIntent) {
-    addMsg(
-      "Our ads service focuses on real results — leads, sales, and visibility.\n\n" +
-      "We manage:\n" +
-      "• Meta Ads (Facebook & Instagram)\n" +
-      "• TikTok Ads\n" +
-      "• Strategy, creatives & optimization\n\n" +
-      "Is this for a business, brand, or personal project?"
-    );
+    addMsg("Our ads service focuses on real results — leads, sales, and visibility.\n" +
+      "We manage Meta Ads (Facebook & Instagram), TikTok Ads, and full strategy/optimization.\n\n" +
+      "Is this for a business, brand, or personal project?");
+    state.context.lastQuestion = "brandOrPersonal";
     return;
   }
 
-  /* ---- SOCIAL MEDIA ---- */
+  /* ==== SOCIAL MEDIA ==== */
   if (socialIntent) {
-    addMsg(
-      "We handle social media end-to-end:\n\n" +
-      "• Content planning & posting\n" +
-      "• Page growth & engagement\n" +
-      "• Community management\n\n" +
-      "Are you starting from scratch or improving an existing page?"
-    );
+    addMsg("We handle social media end-to-end:\n" +
+      "Content planning, posting, page growth & engagement, and community management.\n\n" +
+      "Is this for a brand or personal project?");
+    state.context.lastQuestion = "brandOrPersonal";
     return;
   }
 
-  /* ---- TRAINING ---- */
+  /* ==== TRAINING ==== */
   if (trainingIntent) {
-    addMsg(
-      "Yes 👍 We also offer hands-on digital marketing training.\n\n" +
-      "You’ll learn:\n" +
-      "• Ads setup & strategy\n" +
-      "• Content & growth tactics\n" +
-      "• Tools & real examples\n\n" +
-      "Is this for personal skill-building or business use?"
-    );
+    addMsg("We offer hands-on digital marketing training.\n" +
+      "You’ll learn ads setup, content & growth tactics, tools & real examples.\n\n" +
+      "Is this for personal skill-building or business use?");
+    state.context.lastQuestion = "trainingType";
     return;
   }
 
-  /* ---- PRICING ---- */
+  /* ==== PRICING ==== */
   if (pricingIntent && !state.pricingAsked) {
     state.pricingAsked = true;
-    addMsg(
-      "Pricing depends on a few things:\n\n" +
-      "• The service you need\n" +
-      "• Project size & duration\n" +
-      "• Your goals (leads, sales, growth)\n\n" +
-      "If you want something accurate, a quick consultation helps."
-    );
-    if (!state.whatsappSuggested) addWhatsAppCTA();
+    addMsg("Pricing depends on the service, project size, and goals.\n" +
+      "Which service are you interested in?");
+    state.context.lastQuestion = "pricing";
     return;
   }
 
-  /* ---- BOOKING ---- */
+  /* ==== BOOKING ==== */
   if (bookingIntent) {
     state.bookingIntent = true;
-    addMsg(
-      "Great choice 👍\n\n" +
-      "To book a session, I’ll need:\n" +
-      "• Your full name\n" +
-      "• WhatsApp number\n" +
-      "• What you want to discuss\n\n" +
-      "You can continue here or switch to WhatsApp for faster coordination."
-    );
+    addMsg("To book a session, I’ll need your name, WhatsApp number, and what you want to discuss.\n" +
+      "You can continue here or switch to WhatsApp for faster coordination.");
     addWhatsAppCTA();
     return;
   }
 
-  /* ---- WHATSAPP DIRECT REQUEST ---- */
+  /* ==== WHATSAPP REQUEST ==== */
   if (whatsappIntent) {
-    addMsg(
-      "Sure 😊 You can continue the conversation on WhatsApp.\n" +
-      "Just tap the button below and we’ll take it from there."
-    );
+    addMsg("Sure 😊 You can continue the conversation on WhatsApp.\nTap the button below and we’ll take it from there.");
     addWhatsAppCTA();
     return;
   }
 
-  /* ---- FALLBACK (SMART, NOT DUMB) ---- */
-  addMsg(
-    random([
-      "I want to make sure I understand you correctly 😊\nCould you tell me a bit more?",
-      "Thanks for that.\nAre you asking about services, pricing, or booking a consultation?",
-      "No problem 👍\nLet me know what you’d like help with."
-    ])
-  );
+  /* ==== FALLBACK ==== */
+  addMsg(random([
+    "I want to make sure I understand you correctly 😊 Could you tell me a bit more?",
+    "Thanks for that. Are you asking about services, pricing, or booking a consultation?",
+    "No problem 👍 Let me know what you’d like help with."
+  ]));
 }
 
 /* ================= UTIL ================= */
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
-
-
-
   
 
 </script>
 </body>
 </html>
+
 
 
 
