@@ -65,38 +65,34 @@
   top: 0;
   width: 100%;
   z-index: 999;
-  background: rgba(5, 13, 31, 0.75);
-  backdrop-filter: blur(20px);
-  border-bottom: 0;
+  background: rgba(5, 13, 31, 0.85);
+  backdrop-filter: blur(16px);
 }
 
 .nav {
   max-width: 1200px;
   margin: auto;
-  padding: 0.9rem 1.5rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 800;
+  color: #facc15;
 }
 
-.logo img {
-  width: 34px;
-  height: 34px;
+.nav-links a {
+  margin-left: 1.6rem;
+  font-weight: 600;
+  color: #94a3b8;
 }
 
-    .nav-links a {
-      margin-left: 1.6rem;
-      font-weight: 500;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover { color: #fff; }
-
+.nav-links a:hover {
+  color: #fff;
+}
     .hamburger {
       display: none;
       flex-direction: column;
@@ -226,74 +222,59 @@
     
     /* ================= HERO ================= */
 .hero {
-  max-width: 1200px;
-  margin: auto;
-  padding: 10rem 1.5rem 7rem;
   text-align: center;
+  padding: 10rem 1rem 7rem;
 }
 
-.badge {
+.hero-badge {
   display: inline-block;
-  padding: 0.55rem 1.2rem;
-  border-radius: 999px;
+  padding: .6rem 1rem;
   background: rgba(250,204,21,0.18);
   color: #facc15;
+  border-radius: 999px;
   font-weight: 700;
-  font-size: 0.9rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.4rem;
 }
 
-.hero h1 {
-  font-size: clamp(3rem, 6vw, 4.8rem);
+.hero-title {
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
   font-weight: 900;
-  line-height: 1.15;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.2rem;
 }
 
-.hero h1 span {
+.hero-title .highlight {
   color: #facc15;
 }
 
-.hero p {
-  max-width: 640px;
+.hero-text {
+  max-width: 680px;
   margin: auto;
   color: #94a3b8;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
 
-.hero-actions {
-  margin-top: 3rem;
+.hero-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.hero-actions a {
-  width: 100%;
-  max-width: 320px;
-  margin: auto;
-}
-
-    .btn-primary {
-  padding: 1.1rem 2rem;
-  border-radius: 16px;
-  font-weight: 800;
+.btn-primary {
   background: #facc15;
   color: #000;
-  transition: all 0.35s ease;
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(250,204,21,0.45);
-}
-
-.btn-outline {
-  padding: 1.1rem 2rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.25);
+  padding: .9rem 2rem;
   font-weight: 700;
+  border-radius: 14px;
+}
+
+.btn-secondary {
+  border: 2px solid #facc15;
   color: #fff;
+  padding: .9rem 2rem;
+  font-weight: 700;
+  border-radius: 14px;
 }
 
     /* ================= SECTIONS ================= */
@@ -320,20 +301,52 @@
 }
 
     /* ================= SERVICES ================= */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-    }
+    .service-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
-    .service-card {
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-      border: 1px solid var(--border);
-      padding: 2.4rem;
-      border-radius: var(--radius-xl);
-    }
+.service-header h2 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #fff;
+}
 
-    .service-card h3 { color: var(--yellow); }
+.service-header p {
+  color: #94a3b8;
+  margin-top: .8rem;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.service-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.service-card .icon {
+  font-size: 2rem;
+  color: #facc15;
+  margin-bottom: 1rem;
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: .6rem;
+  color: #facc15;
+}
+
+.service-card p {
+  color: #94a3b8;
+}
 
     /* ================= FOOTER ================= */
     .footer {
@@ -676,86 +689,43 @@
     </svg>
   </a>
 </div>
-  
-</div>
-
 <section class="hero">
-  <span class="badge">Social Media & Sponsored Ads</span>
-  <h1>We Help Brands <span>Grow</span> Online</h1>
-  <p>MAJ Media Digital helps ready-to-sell businesses scale using strategy, ads and content.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="https://wa.link/j1qjj7" target="_blank">Book a Consultation</a>
-    <a class="btn-outline" href="#">View Results</a>
+  <span class="hero-badge">Social Media & Sponsored Ads</span>
+  <h1 class="hero-title">We Help Businesses <span class="highlight">Grow Online</span></h1>
+  <p class="hero-text">We help ready-to-sell businesses scale using strategy, ads and content.</p>
+  <div class="hero-buttons">
+    <a href="https://wa.link/j1qjj7" class="btn-primary">Book a Consultation</a>
+    <a href="#" class="btn-secondary">View Results</a>
   </div>
 </section>
 
 <section id="services">
-  <div class="section-title">
+  <div class="service-header">
     <h2>Our Services</h2>
     <p>Everything your brand needs to scale digitally</p>
   </div>
 
-  <div class="services premium-services">
-
-    <!-- Service 1 -->
-    <div class="service-card premium">
-      <div class="avatar">
-        <!-- SVG Anime Avatar -->
-        <svg viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="90" fill="#facc15"/>
-          <circle cx="100" cy="85" r="40" fill="#0b1d39"/>
-          <rect x="45" y="125" width="110" height="45" rx="22" fill="#0b1d39"/>
-          <circle cx="85" cy="80" r="6" fill="#fff"/>
-          <circle cx="115" cy="80" r="6" fill="#fff"/>
-        </svg>
-      </div>
+  <div class="service-grid">
+    <div class="service-card">
+      <div class="icon">&#128187;</div>
       <h3>Social Media Management</h3>
-      <p>Consistent content, audience growth, and brand positioning across all platforms.</p>
+      <p>Consistent content, audience growth, and brand positioning.</p>
     </div>
-
-    <!-- Service 2 -->
-    <div class="service-card premium">
-      <div class="avatar">
-        <svg viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="90" fill="#0b1d39"/>
-          <circle cx="100" cy="85" r="40" fill="#facc15"/>
-          <rect x="45" y="125" width="110" height="45" rx="22" fill="#facc15"/>
-          <circle cx="85" cy="80" r="6" fill="#0b1d39"/>
-          <circle cx="115" cy="80" r="6" fill="#0b1d39"/>
-        </svg>
-      </div>
+    <div class="service-card">
+      <div class="icon">&#128202;</div>
       <h3>Sponsored Ads</h3>
-      <p>High-converting ad campaigns built with data, psychology and performance tracking.</p>
+      <p>High-converting campaigns built with data and psychology.</p>
     </div>
-
-    <!-- Service 3 -->
-    <div class="service-card premium">
-      <div class="avatar">
-        <svg viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="90" fill="#facc15"/>
-          <circle cx="100" cy="80" r="35" fill="#0b1d39"/>
-          <rect x="40" y="120" width="120" height="50" rx="25" fill="#0b1d39"/>
-          <path d="M70 95 Q100 115 130 95" stroke="#fff" stroke-width="4" fill="none"/>
-        </svg>
-      </div>
+    <div class="service-card">
+      <div class="icon">&#127916;</div>
       <h3>Content Creation</h3>
-      <p>Scroll-stopping visuals and videos crafted to convert attention into action.</p>
+      <p>Scroll-stopping visuals & videos crafted to convert attention.</p>
     </div>
-
-    <!-- Service 4 -->
-    <div class="service-card premium">
-      <div class="avatar">
-        <svg viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="90" fill="#0b1d39"/>
-          <circle cx="100" cy="80" r="35" fill="#facc15"/>
-          <rect x="45" y="120" width="110" height="50" rx="25" fill="#facc15"/>
-          <path d="M75 95 L95 105 L125 85" stroke="#0b1d39" stroke-width="4" fill="none"/>
-        </svg>
-      </div>
+    <div class="service-card">
+      <div class="icon">&#127891;</div>
       <h3>Training & Consulting</h3>
-      <p>Hands-on guidance to help individuals and brands master digital marketing.</p>
+      <p>Hands-on guidance to level up your marketing skills.</p>
     </div>
-
   </div>
 </section>
 
@@ -926,6 +896,7 @@ workflowCards.forEach(card => workflowObserver.observe(card));
 </script>
 </body>
 </html>
+
 
 
 
